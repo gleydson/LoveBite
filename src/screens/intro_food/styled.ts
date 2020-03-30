@@ -1,4 +1,5 @@
 import { Keyboard, Platform, Animated } from 'react-native';
+
 import styled from 'styled-components/native';
 
 export const KeyboardSafe = styled.TouchableWithoutFeedback.attrs({

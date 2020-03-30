@@ -1,12 +1,15 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
-// import { Container } from './styles';
+const styles = StyleSheet.create({
+  container: { alignItems: 'center', flex: 1, justifyContent: 'center' },
+  text: { color: '#000', fontSize: 18 },
+});
 
 export default function home() {
   return (
-    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-      <Text>home</Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>home</Text>
     </View>
   );
 }

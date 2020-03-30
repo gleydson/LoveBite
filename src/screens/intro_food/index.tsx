@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Keyboard, TextInput, Animated, Easing } from 'react-native';
+import { Keyboard, Animated, Easing, Platform } from 'react-native';
+
+import i18n from '@services/i18n';
 
 import {
   KeyboardSafe,
@@ -31,7 +33,7 @@ interface Props {
 }
 
 export default function intro_food({ navigation }: Props) {
-  const secondInputRef = useRef<TextInput>(null);
+  const secondInputRef = useRef<any>(null);
 
   const [ddd, setDDD] = useState('');
   const [number, setNumber] = useState('');
@@ -39,14 +41,15 @@ export default function intro_food({ navigation }: Props) {
   const [imageSize] = useState(new Animated.ValueXY(IMAGE_SIZE));
 
   function handleKeyboardOpened(event: { duration: number }) {
+    const duration = Platform.OS === 'ios' ? event.duration : 50;
     Animated.parallel([
       Animated.timing(imageSize.x, {
-        duration: event.duration,
+        duration,
         toValue: IMAGE_SIZE.x * 0.5,
         easing: Easing.ease,
       }),
       Animated.timing(imageSize.y, {
-        duration: event.duration,
+        duration,
         toValue: IMAGE_SIZE.y * 0.5,
         easing: Easing.ease,
       }),
@@ -54,14 +57,15 @@ export default function intro_food({ navigation }: Props) {
   }
 
   function handleKeyboardClosed(event: { duration: number }) {
+    const duration = Platform.OS === 'ios' ? event.duration : 50;
     Animated.parallel([
       Animated.timing(imageSize.x, {
-        duration: event.duration,
+        duration,
         toValue: IMAGE_SIZE.x,
         easing: Easing.ease,
       }),
       Animated.timing(imageSize.y, {
-        duration: event.duration,
+        duration,
         toValue: IMAGE_SIZE.y,
         easing: Easing.ease,
       }),
@@ -69,12 +73,17 @@ export default function intro_food({ navigation }: Props) {
   }
 
   useEffect(() => {
-    Keyboard.addListener('keyboardWillShow', handleKeyboardOpened);
-    Keyboard.addListener('keyboardWillHide', handleKeyboardClosed);
+    Keyboard.addListener(
+      Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow',
+      handleKeyboardOpened
+    );
+    Keyboard.addListener(
+      Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide',
+      handleKeyboardClosed
+    );
 
     return () => {
-      Keyboard.removeListener('keyboardWillShow', () => {});
-      Keyboard.removeListener('keyboardWillHide', () => {});
+      Keyboard.removeAllListeners();
     };
   }, []);
 
@@ -88,15 +97,12 @@ export default function intro_food({ navigation }: Props) {
       <KeyboardAvoidingView>
         <Container>
           <MainContent>
-            <Title>For Local Street Restaurant with Deals</Title>
+            <Title>{i18n.t('intro-food_title')}</Title>
             <Image
               style={{ width: imageSize.x, height: imageSize.y }}
               source={food}
             />
-            <Subtitle>
-              It is a long established fact that a reader will be distracted by
-              the readablli
-            </Subtitle>
+            <Subtitle>{i18n.t('intro-food_subtitle')}</Subtitle>
           </MainContent>
           <ContactContainer>
             <DDD
@@ -112,7 +118,7 @@ export default function intro_food({ navigation }: Props) {
           </ContactContainer>
           <ContainerButton>
             <Button onPress={handleSubmit}>
-              <TextButton>Next</TextButton>
+              <TextButton>{i18n.t('intro-food_button')}</TextButton>
             </Button>
           </ContainerButton>
         </Container>
