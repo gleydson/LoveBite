@@ -1,5 +1,4 @@
 import React from 'react';
-import { Keyboard } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { setIsShowOverboarding } from '@store/ducks/settings/actions';
@@ -23,7 +22,6 @@ export default function intro_location() {
   const dispatch = useDispatch();
 
   function handleSubmit() {
-    Keyboard.dismiss();
     dispatch(setIsShowOverboarding(false));
   }
 

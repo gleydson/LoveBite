@@ -83,7 +83,14 @@ export default function intro_food({ navigation }: Props) {
     );
 
     return () => {
-      Keyboard.removeAllListeners();
+      Keyboard.removeListener(
+        Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow',
+        _ => _
+      );
+      Keyboard.removeListener(
+        Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide',
+        _ => _
+      );
     };
   }, []);
 
