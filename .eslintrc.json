@@ -2,10 +2,10 @@
   "env": {
     "es6": true,
     "node": true,
-    "jest": true
+    "jest": true,
+    "react-native/react-native": true
   },
   "extends": [
-    "plugin:react/recommended",
     "plugin:react-native/all",
     "airbnb",
     "prettier",
@@ -33,6 +33,15 @@
     "@typescript-eslint",
     "prettier"
   ],
+  "overrides": [
+    {
+      "files": ["src/services/i18n/locales/*.ts"],
+      "rules": {
+        "max-len": "off",
+        "prettier/prettier": "off"
+      }
+    }
+  ],
   "rules": {
     "prettier/prettier": "error",
     "max-len": [
@@ -45,9 +54,10 @@
         "ignorePattern": "^\\s*const\\s.+=\\s*require\\s*\\("
       }
     ],
-    "no-unused-vars": 0,
+    "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": 2,
     "react/prop-types": "off",
+    "react-native/no-color-literals": "off",
     "import/no-unresolved": "off",
     "react/state-in-constructor": "off",
     "react/jsx-props-no-spreading": "off",
@@ -72,12 +82,14 @@
           ["/^react/", "/^@react/"],
           "module",
           [
-            "/^@screens/",
             "/^@components/",
             "/^@services/",
-            "/^@hooks/",
+            "/^@screens/",
             "/^@assets/",
-            "/^@styles/"
+            "/^@styles/",
+            "/^@hooks/",
+            "/ˆ@store/",
+            "/ˆ@ducks/"
           ],
           ["parent", "sibling", "index"]
         ],

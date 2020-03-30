@@ -3,7 +3,7 @@
     "target": "esnext",
     "module": "commonjs",
     "lib": ["es6"],
-    "allowJs": false,
+    "allowJs": true,
     "jsx": "react-native",
     "rootDir": "./src",
     "removeComments": true,
@@ -20,11 +20,13 @@
       "@services/*": ["services/*"],
       "@hooks/*": ["hooks/*"],
       "@screens/*": ["screens/*"],
-      "@styles/*": ["styles/*"]
+      "@styles/*": ["styles/*"],
+      "@store/*": ["store/*"],
+      "@ducks/*": ["store/ducks/*"]
     }
   },
   "include": ["src"],
-  "files": ["src/@types/styled.d.ts"],
+  "files": ["src/@types/styled.d.ts", "src/@types/global.d.ts"],
   "exclude": [
     "node_modules",
     "babel.config.js",

@@ -1,37 +1,41 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import {} from '@react-navigation/native';
+// import { } from '@react-navigation/native';
 import React from 'react';
 
-import SplashScreen from '@screens/splash';
 import HomeScreen from '@screens/home';
+import IntroFoodScreen from '@screens/intro_food';
+import IntroLocationScreen from '@screens/intro_location';
+import SplashScreen from '@screens/splash';
 
-import Overboarding from './onboarding';
-
-const MainStack = createStackNavigator();
+const Stack = createStackNavigator();
 
 interface Props {
   isLoading: boolean;
-  isOverboardingFinalized: boolean;
+  isShowOverboarding: boolean;
 }
 
-export default function Routes({ isLoading, isOverboardingFinalized }: Props) {
+export default function Routes({ isLoading, isShowOverboarding }: Props) {
   if (!isLoading) {
     return <SplashScreen />;
   }
 
-  if (isOverboardingFinalized) {
-    <MainStack.Navigator
+  return (
+    <Stack.Navigator
       screenOptions={{
         gestureEnabled: true,
-        cardOverlayEnabled: true,
         gestureDirection: 'vertical',
       }}
       headerMode='none'
       mode='modal'
     >
-      <MainStack.Screen name='Home' component={HomeScreen} />
-    </MainStack.Navigator>;
-  }
-
-  return <Overboarding />;
+      {isShowOverboarding ? (
+        <>
+          <Stack.Screen name='IntroFood' component={IntroFoodScreen} />
+          <Stack.Screen name='IntroLocation' component={IntroLocationScreen} />
+        </>
+      ) : (
+        <Stack.Screen name='Home' component={HomeScreen} />
+      )}
+    </Stack.Navigator>
+  );
 }
