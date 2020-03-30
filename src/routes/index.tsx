@@ -1,5 +1,4 @@
 import { createStackNavigator } from '@react-navigation/stack';
-// import { } from '@react-navigation/native';
 import React from 'react';
 
 import HomeScreen from '@screens/home';
@@ -15,7 +14,7 @@ interface Props {
 }
 
 export default function Routes({ isLoading, isShowOverboarding }: Props) {
-  if (!isLoading) {
+  if (isLoading) {
     return <SplashScreen />;
   }
 

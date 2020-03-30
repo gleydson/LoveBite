@@ -7,7 +7,7 @@ import {
   KeyboardSafe,
   KeyboardAvoidingView,
   Container,
-  MainContent,
+  ContainerBottom,
   Image,
   Title,
   Subtitle,
@@ -73,24 +73,16 @@ export default function intro_food({ navigation }: Props) {
   }
 
   useEffect(() => {
-    Keyboard.addListener(
-      Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow',
-      handleKeyboardOpened
-    );
-    Keyboard.addListener(
-      Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide',
-      handleKeyboardClosed
-    );
+    const willOrDidShow =
+      Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
+    const willOrDidHide =
+      Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
+    Keyboard.addListener(willOrDidShow, handleKeyboardOpened);
+    Keyboard.addListener(willOrDidHide, handleKeyboardClosed);
 
     return () => {
-      Keyboard.removeListener(
-        Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow',
-        _ => _
-      );
-      Keyboard.removeListener(
-        Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide',
-        _ => _
-      );
+      Keyboard.removeListener(willOrDidShow, _ => _);
+      Keyboard.removeListener(willOrDidHide, _ => _);
     };
   }, []);
 
@@ -103,31 +95,31 @@ export default function intro_food({ navigation }: Props) {
     <KeyboardSafe>
       <KeyboardAvoidingView>
         <Container>
-          <MainContent>
-            <Title>{i18n.t('intro-food_title')}</Title>
-            <Image
-              style={{ width: imageSize.x, height: imageSize.y }}
-              source={food}
-            />
-            <Subtitle>{i18n.t('intro-food_subtitle')}</Subtitle>
-          </MainContent>
-          <ContactContainer>
-            <DDD
-              onChangeText={setDDD}
-              onSubmitEditing={() => secondInputRef.current?.focus()}
-              value={ddd}
-            />
-            <Number
-              ref={secondInputRef}
-              onChangeText={setNumber}
-              value={number}
-            />
-          </ContactContainer>
-          <ContainerButton>
-            <Button onPress={handleSubmit}>
-              <TextButton>{i18n.t('intro-food_button')}</TextButton>
-            </Button>
-          </ContainerButton>
+          <Title>{i18n.t('intro-food_title')}</Title>
+          <Image
+            style={{ width: imageSize.x, height: imageSize.y }}
+            source={food}
+          />
+          <Subtitle>{i18n.t('intro-food_subtitle')}</Subtitle>
+          <ContainerBottom>
+            <ContactContainer>
+              <DDD
+                onChangeText={setDDD}
+                onSubmitEditing={() => secondInputRef.current?.focus()}
+                value={ddd}
+              />
+              <Number
+                ref={secondInputRef}
+                onChangeText={setNumber}
+                value={number}
+              />
+            </ContactContainer>
+            <ContainerButton>
+              <Button onPress={handleSubmit}>
+                <TextButton>{i18n.t('intro-food_button')}</TextButton>
+              </Button>
+            </ContainerButton>
+          </ContainerBottom>
         </Container>
       </KeyboardAvoidingView>
     </KeyboardSafe>

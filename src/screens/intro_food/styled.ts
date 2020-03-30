@@ -16,13 +16,7 @@ export const KeyboardAvoidingView = styled.KeyboardAvoidingView.attrs({
 export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: ${props => props.theme.colors.background};
-`;
-
-export const MainContent = styled.View`
-  flex: 3;
-  padding: 0 20px;
   align-items: center;
-  justify-content: center;
 `;
 
 export const Title = styled.Text`
@@ -30,7 +24,7 @@ export const Title = styled.Text`
   font-size: ${props => props.theme.fonts.big};
   font-weight: bold;
   text-align: center;
-  margin-bottom: 50px;
+  margin: 50px 0;
   padding: 0 20px;
 `;
 
@@ -44,10 +38,15 @@ export const Subtitle = styled.Text`
 
 export const Image = styled(Animated.Image)``;
 
+export const ContainerBottom = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
 export const ContactContainer = styled.View`
   flex-direction: row;
-  justify-content: center;
-  padding-bottom: 20px;
+  padding: 20px 0;
 `;
 
 export const DDD = styled.TextInput.attrs({
@@ -89,9 +88,7 @@ export const Number = styled.TextInput.attrs({
 `;
 
 export const ContainerButton = styled.View`
-  padding: 10px 20px;
-  align-items: center;
-  justify-content: center;
+  padding: 20px 0;
 `;
 
 export const Button = styled.TouchableOpacity`

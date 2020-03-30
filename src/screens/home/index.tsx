@@ -17,6 +17,7 @@ export default function home() {
     (state: ApplicationState) => state.restaurants.data
   );
 
+  // eslint-disable-next-line no-console
   console.log(restaurants);
 
   useEffect(() => {
