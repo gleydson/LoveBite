@@ -22,7 +22,8 @@
       "@screens/*": ["screens/*"],
       "@styles/*": ["styles/*"],
       "@store/*": ["store/*"],
-      "@ducks/*": ["store/ducks/*"]
+      "@ducks/*": ["store/ducks/*"],
+      "@config/*": ["config/*"]
     }
   },
   "include": ["src"],

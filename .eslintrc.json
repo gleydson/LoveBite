@@ -54,6 +54,7 @@
         "ignorePattern": "^\\s*const\\s.+=\\s*require\\s*\\("
       }
     ],
+    "no-new": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": 2,
     "react/prop-types": "off",
@@ -86,6 +87,7 @@
             "/^@services/",
             "/^@screens/",
             "/^@assets/",
+            "/ˆ@config/",
             "/^@styles/",
             "/^@hooks/",
             "/ˆ@store/",

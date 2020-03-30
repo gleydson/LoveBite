@@ -4,10 +4,10 @@ import { createStore, compose, applyMiddleware, Store } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 
-import reducers from './ducks';
 import { RestaurantsState } from './ducks/restaurants/types';
+import reducers from './ducks/rootReducer';
+import sagas from './ducks/rootSaga';
 import { SettingsState } from './ducks/settings/types';
-import sagas from './sagas';
 
 const persistConfig = {
   key: '@LoveBite',

@@ -31,6 +31,7 @@ module.exports = {
           '@services': './src/services',
           '@store': './src/store',
           '@ducks': './src/store/ducks',
+          '@config': './src/config',
         },
       },
     ],
